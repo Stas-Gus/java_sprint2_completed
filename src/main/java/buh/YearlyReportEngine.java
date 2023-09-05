@@ -86,17 +86,26 @@ public class YearlyReportEngine {
 
             String itemName = null;
             int maxProfit = 0;
+            String itemSpendingName = null;
+            int minProfit = 0;
+
             for (Transaction monthTransaction : montlyReport.rows) {
                 if (!monthTransaction.isExpense) {
                     if (monthTransaction.sum * monthTransaction.quantity > maxProfit) {
                         maxProfit = monthTransaction.sum * monthTransaction.quantity;
                         itemName = monthTransaction.name;
                     }
+                } else {
+                    if (monthTransaction.sum * monthTransaction.quantity > minProfit) {
+                        minProfit = monthTransaction.sum * monthTransaction.quantity;
+                        itemSpendingName = monthTransaction.name;
+                    }
                 }
             }
 
             System.out.println(montlyReport.month + " " + montlyReport.year + " " + montlyReport.rows +
-                    " название самого прибыльного товара: " + itemName + ", сумма: " + maxProfit);
+                    " название самого прибыльного товара: " + itemName + ", сумма: " + maxProfit +
+                    " товар с самой большой тратой : " + itemSpendingName + ", сумма: " + minProfit);
         }
     }
     void showYearInfo() {

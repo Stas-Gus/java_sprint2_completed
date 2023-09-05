@@ -10,34 +10,29 @@ public class Main {
         YearlyReportEngine engine = new YearlyReportEngine();
 
         Scanner scanner = new Scanner(System.in);
-        boolean readMonth = false;
-        boolean readYear = false;
-
         while (true) { // бесконечный цикл запуска программы
             printMenu(); // вывод общего меню на экран
             int userInput = scanner.nextInt();
 
             if (userInput == 1) {
-                readMonth = true;
                 engine.readMonthlyReport(); // считать месячные отчеты
             } else if (userInput == 2) {
-                readYear = true;
                 engine.readYearlyReport(); // считать годовой отчет
             } else if (userInput == 3) {
-                if (readMonth == false && readYear == false) {
+                if (engine.monthlyReports.isEmpty() || engine.yearlyReport.rows.isEmpty()) {
                     System.out.println("Сначала считайте месячные и годовые отчеты");
                 } else {
                     engine.checkReports();  // сверка годового и месячных отчетов
                 }
             } else if (userInput == 4) {
-                if (readMonth == false && readYear == false) {
-                    System.out.println("Сначала считайте месячные и годовые отчеты");
+                if (engine.monthlyReports.isEmpty()) {
+                    System.out.println("Сначала считайте месячные отчеты");
                 } else {
                     engine.showMonthInfo(); // информация о месячных отчетах
                 }
             } else if (userInput == 5) {
-                if (readMonth == false && readYear == false) {
-                    System.out.println("Сначала считайте месячные и годовые отчеты");
+                if (engine.yearlyReport.rows.isEmpty()) {
+                    System.out.println("Сначала считайте годовые отчеты");
                 } else {
                     engine.showYearInfo(); // инфиормация о годовых отчетах
                 }
